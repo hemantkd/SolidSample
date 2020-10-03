@@ -10,7 +10,7 @@ namespace ArdalisRating
     {
         public ConsoleLogger Logger { get; set; } = new ConsoleLogger();
         public FilePolicySource PolicySource { get; set; } = new FilePolicySource();
-        public PolicySerializer PolicySerializer { get; set; } = new PolicySerializer();
+        public JsonPolicySerializer PolicySerializer { get; set; } = new JsonPolicySerializer();
 
         public decimal Rating { get; set; }
         public void Rate()

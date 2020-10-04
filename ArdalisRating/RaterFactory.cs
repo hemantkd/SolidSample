@@ -16,8 +16,7 @@
                     return new LifePolicyRater(ratingEngine, ratingEngine.Logger);
 
                 default:
-                    // TODO: Implement Null Object Pattern
-                    return null;
+                    return new UnknownPolicyRater(ratingEngine, ratingEngine.Logger);
             }
         }
     }

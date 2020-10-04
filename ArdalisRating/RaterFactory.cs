@@ -9,6 +9,9 @@
                 case PolicyType.Auto:
                     return new AutoPolicyRater(ratingEngine, ratingEngine.Logger);
 
+                case PolicyType.Flood:
+                    return new FloodPolicyRater(ratingEngine, ratingEngine.Logger);
+
                 case PolicyType.Land:
                     return new LandPolicyRater(ratingEngine, ratingEngine.Logger);
 
@@ -16,6 +19,7 @@
                     return new LifePolicyRater(ratingEngine, ratingEngine.Logger);
 
                 default:
+                    // currently this can't be reached
                     return new UnknownPolicyRater(ratingEngine, ratingEngine.Logger);
             }
         }

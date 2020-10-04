@@ -24,30 +24,10 @@ namespace ArdalisRating
 
             var policy = PolicySerializer.GetPolicyFromJsonString(policyJson);
 
-            switch (policy.Type)
-            {
-                case PolicyType.Auto:
-                    var rater = new AutoPolicyRater(this, Logger);
-                    rater.Rate(policy);
+            var factory = new RaterFactory();
 
-                    break;
-
-                case PolicyType.Land:
-                    var rater2 = new LandPolicyRater(this, Logger);
-                    rater2.Rate(policy);
-
-                    break;
-
-                case PolicyType.Life:
-                    var rate3 = new LifePolicyRater(this, Logger);
-                    rate3.Rate(policy);
-
-                    break;
-
-                default:
-                    Logger.Log("Unknown policy type");
-                    break;
-            }
+            var rater = factory.Create(policy, this);
+            rater.Rate(policy);
 
             Logger.Log("Rating completed.");
         }

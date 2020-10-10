@@ -14,7 +14,7 @@ namespace ArdalisRating
             }
             catch (Exception)
             {
-                return null;
+                return new UnknownPolicyRater(ratingEngine, ratingEngine.Logger);
             }
         }
     }

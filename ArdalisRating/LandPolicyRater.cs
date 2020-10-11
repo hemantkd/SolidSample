@@ -2,10 +2,10 @@
 {
     public class LandPolicyRater : Rater
     {
-        public LandPolicyRater(RatingEngine ratingEngine, ConsoleLogger logger)
-            : base(ratingEngine, logger)
+        public LandPolicyRater(IRatingContext context)
+            : base(context)
         { }
-        
+
         public override void Rate(Policy policy)
         {
             Logger.Log("Rating LAND policy...");
@@ -22,7 +22,7 @@
                 return;
             }
 
-            RatingEngine.Rating = policy.BondAmount * 0.05m;
+            Context.UpdateRating(policy.BondAmount * 0.05m);
         }
     }
 }

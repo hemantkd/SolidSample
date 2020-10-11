@@ -2,8 +2,8 @@
 {
     public class AutoPolicyRater : Rater
     {
-        public AutoPolicyRater(RatingEngine ratingEngine, ConsoleLogger logger)
-            : base(ratingEngine, logger)
+        public AutoPolicyRater(IRatingContext context)
+            : base(context)
         { }
 
         public override void Rate(Policy policy)
@@ -21,10 +21,10 @@
             {
                 if (policy.Deductible < 500)
                 {
-                    RatingEngine.Rating = 1000m;
+                    Context.UpdateRating(1000m);
                 }
 
-                RatingEngine.Rating = 900m;
+                Context.UpdateRating(900m);
             }
         }
     }

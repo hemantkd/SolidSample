@@ -2,8 +2,8 @@
 {
     public class UnknownPolicyRater : Rater
     {
-        public UnknownPolicyRater(RatingEngine ratingEngine, ConsoleLogger logger)
-            : base(ratingEngine, logger)
+        public UnknownPolicyRater(IRatingContext context)
+            : base(context)
         { }
 
         public override void Rate(Policy policy)

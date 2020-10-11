@@ -4,7 +4,8 @@ namespace ArdalisRating
 {
     public class LifePolicyRater : Rater
     {
-        public LifePolicyRater(IRatingContext context) : base(context)
+        public LifePolicyRater(IRatingUpdater ratingUpdater)
+            : base(ratingUpdater)
         { }
 
         public override void Rate(Policy policy)
@@ -41,11 +42,11 @@ namespace ArdalisRating
             decimal baseRate = policy.Amount * age / 200;
             if (policy.IsSmoker)
             {
-                Context.UpdateRating(baseRate * 2);
+                RatingUpdater.UpdateRating(baseRate * 2);
                 return;
             }
 
-            Context.UpdateRating(baseRate);
+            RatingUpdater.UpdateRating(baseRate);
         }
     }
 }

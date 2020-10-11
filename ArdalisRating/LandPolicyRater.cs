@@ -2,8 +2,8 @@
 {
     public class LandPolicyRater : Rater
     {
-        public LandPolicyRater(IRatingContext context)
-            : base(context)
+        public LandPolicyRater(IRatingUpdater ratingUpdater)
+            : base(ratingUpdater)
         { }
 
         public override void Rate(Policy policy)
@@ -22,7 +22,7 @@
                 return;
             }
 
-            Context.UpdateRating(policy.BondAmount * 0.05m);
+            RatingUpdater.UpdateRating(policy.BondAmount * 0.05m);
         }
     }
 }

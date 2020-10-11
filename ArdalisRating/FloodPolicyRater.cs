@@ -2,10 +2,10 @@
 {
     public class FloodPolicyRater : Rater
     {
-        public FloodPolicyRater(IRatingContext context)
-            : base(context)
+        public FloodPolicyRater(IRatingUpdater ratingUpdater)
+            : base(ratingUpdater)
         { }
-        
+
         public override void Rate(Policy policy)
         {
             Logger.Log("Rating FLOOD policy...");
@@ -44,7 +44,7 @@
                 multiple = 1.1m;
             }
             
-            Context.UpdateRating(policy.BondAmount * 0.05m * multiple);
+            RatingUpdater.UpdateRating(policy.BondAmount * 0.05m * multiple);
         }
     }
 }

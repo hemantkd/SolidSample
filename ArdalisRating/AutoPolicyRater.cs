@@ -2,8 +2,8 @@
 {
     public class AutoPolicyRater : Rater
     {
-        public AutoPolicyRater(IRatingContext context)
-            : base(context)
+        public AutoPolicyRater(IRatingUpdater ratingUpdater)
+            : base(ratingUpdater)
         { }
 
         public override void Rate(Policy policy)
@@ -21,10 +21,11 @@
             {
                 if (policy.Deductible < 500)
                 {
-                    Context.UpdateRating(1000m);
+                    RatingUpdater.UpdateRating(1000m);
+                    return;
                 }
 
-                Context.UpdateRating(900m);
+                RatingUpdater.UpdateRating(900m);
             }
         }
     }

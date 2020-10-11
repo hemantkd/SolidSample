@@ -4,8 +4,6 @@
     {
         public RatingEngine Engine { get; set; }
 
-        public ConsoleLogger Logger => new ConsoleLogger();
-
         public Rater CreateRaterForPolicy(Policy policy, IRatingContext context)
         {
             return new RaterFactory().Create(policy, context);
@@ -26,7 +24,7 @@
             return new FilePolicySource().GetPolicyFromSource();
         }
 
-        public string LoadPolicyFromURI()
+        public string LoadPolicyFromURI(string uri)
         {
             throw new System.NotImplementedException();
         }
@@ -34,11 +32,6 @@
         public void Log(string message)
         {
             new ConsoleLogger().Log(message);
-        }
-
-        public void UpdateRating(decimal rating)
-        {
-            Engine.Rating = rating;
         }
     }
 }

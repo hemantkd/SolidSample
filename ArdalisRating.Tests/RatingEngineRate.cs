@@ -6,6 +6,15 @@ namespace ArdalisRating.Tests
 {
     public class RatingEngineRate
     {
+        private readonly RatingEngine _engine;
+        private readonly ILogger _logger;
+
+        public RatingEngineRate()
+        {
+            _logger = new FakeLogger();
+            _engine = new RatingEngine(_logger);
+        }
+
         [Fact]
         public void ReturnsRatingOf10000For200000LandPolicy()
         {
@@ -18,9 +27,8 @@ namespace ArdalisRating.Tests
             string json = JsonConvert.SerializeObject(policy);
             File.WriteAllText("policy.json", json);
 
-            var engine = new RatingEngine();
-            engine.Rate();
-            var result = engine.Rating;
+            _engine.Rate();
+            var result = _engine.Rating;
 
             Assert.Equal(10000, result);
         }
@@ -37,9 +45,8 @@ namespace ArdalisRating.Tests
             string json = JsonConvert.SerializeObject(policy);
             File.WriteAllText("policy.json", json);
 
-            var engine = new RatingEngine();
-            engine.Rate();
-            var result = engine.Rating;
+            _engine.Rate();
+            var result = _engine.Rating;
 
             Assert.Equal(0, result);
         }

@@ -6,20 +6,23 @@
     /// </summary>
     public class RatingEngine
     {
+        private readonly ILogger _logger;
+
         public IRatingContext Context { get; } = new DefaultRatingContext();
 
         public decimal Rating { get; set; }
 
-        public RatingEngine()
+        public RatingEngine(ILogger logger)
         {
+            _logger = logger;
             Context.Engine = this;
         }
 
         public void Rate()
         {
-            Context.Log("Starting rate.");
+            _logger.Log("Starting rate.");
 
-            Context.Log("Loading policy.");
+            _logger.Log("Loading policy.");
 
             // load policy - open file policy.json
             string policyJson = Context.LoadPolicyFromFile();
@@ -29,7 +32,7 @@
             var rater = Context.CreateRaterForPolicy(policy, Context);
             rater.Rate(policy);
 
-            Context.Log("Rating completed.");
+            _logger.Log("Rating completed.");
         }
     }
 }

@@ -7,7 +7,7 @@ namespace ArdalisRating.Tests
     public class RatingEngineRate
     {
         private readonly RatingEngine _engine;
-        private readonly ILogger _logger;
+        private readonly FakeLogger _logger;
 
         public RatingEngineRate()
         {
@@ -49,6 +49,26 @@ namespace ArdalisRating.Tests
             var result = _engine.Rating;
 
             Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public void LogsStartingLoadingAndCompleting()
+        {
+            var policy = new Policy
+            {
+                Type = "Land",
+                BondAmount = 200000,
+                Valuation = 260000
+            };
+            string json = JsonConvert.SerializeObject(policy);
+            File.WriteAllText("policy.json", json);
+
+            _engine.Rate();
+            var result = _engine.Rating;
+
+            Assert.Contains(_logger.LoggedMessages, m => m == "Starting rate.");
+            Assert.Contains(_logger.LoggedMessages, m => m == "Loading policy.");
+            Assert.Contains(_logger.LoggedMessages, m => m == "Rating completed.");
         }
     }
 }

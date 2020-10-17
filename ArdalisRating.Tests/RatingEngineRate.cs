@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using System.IO;
 using Xunit;
 
 namespace ArdalisRating.Tests
@@ -9,11 +8,14 @@ namespace ArdalisRating.Tests
         private readonly RatingEngine _engine;
         private readonly FakeLogger _logger;
         private readonly FakePolicySource _policySource;
+        private readonly JsonPolicySerializer _policySerializer;
+
         public RatingEngineRate()
         {
             _logger = new FakeLogger();
             _policySource = new FakePolicySource();
-            _engine = new RatingEngine(_logger, _policySource);
+            _policySerializer = new JsonPolicySerializer();
+            _engine = new RatingEngine(_logger, _policySource, _policySerializer);
         }
 
         [Fact]

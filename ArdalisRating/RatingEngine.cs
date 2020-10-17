@@ -6,7 +6,7 @@
     /// </summary>
     public class RatingEngine
     {
-        public DefaultRatingContext Context { get; } = new DefaultRatingContext();
+        public IRatingContext Context { get; } = new DefaultRatingContext();
 
         public decimal Rating { get; set; }
 

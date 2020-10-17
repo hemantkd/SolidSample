@@ -15,7 +15,7 @@
 
         public Rater CreateRaterForPolicy(Policy policy, IRatingContext context)
         {
-            return new RaterFactory().Create(policy, context);
+            return new RaterFactory(new RatingUpdater(Engine)).Create(policy, context);
         }
 
         public Policy GetPolicyFromJsonString(string policyJson)

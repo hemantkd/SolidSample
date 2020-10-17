@@ -30,10 +30,8 @@
             _logger.Log("Loading policy.");
 
             // load policy - open file policy.json
-            //string policyJson = Context.LoadPolicyFromFile();
             string policyJson = _policySource.GetPolicyFromSource();
 
-            //var policy = Context.GetPolicyFromJsonString(policyJson);
             var policy = _policySerializer.GetPolicyFromJsonString(policyJson);
 
             var rater = Context.CreateRaterForPolicy(policy, Context);

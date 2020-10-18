@@ -15,7 +15,7 @@ namespace ArdalisRating.Tests
             _logger = new FakeLogger();
             _policySource = new FakePolicySource();
             _policySerializer = new JsonPolicySerializer();
-            _engine = new RatingEngine(_logger, _policySource, _policySerializer);
+            _engine = new RatingEngine(_logger, _policySource, _policySerializer, new RaterFactory(_logger));
         }
 
         [Fact]
